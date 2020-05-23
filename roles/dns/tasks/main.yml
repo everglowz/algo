@@ -21,6 +21,13 @@
   notify:
     - restart dnscrypt-proxy
 
+- name: dnscrypt-proxy whitelist configured
+  template:
+    src: whitelist.txt.j2
+    dest: "{{ config_prefix|default('/') }}etc/dnscrypt-proxy/whitelist.txt"
+  notify:
+    - restart dnscrypt-proxy
+
 - name: dnscrypt-proxy configured
   template:
     src: dnscrypt-proxy.toml.j2
