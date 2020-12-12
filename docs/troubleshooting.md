@@ -22,6 +22,7 @@ First of all, check [this](https://github.com/trailofbits/algo#features) and ens
      * [Error: Failed to create symlinks for deploying to localhost](#error-failed-to-create-symlinks-for-deploying-to-localhost)
      * [Wireguard: Unable to find 'configs/...' in expected paths](#wireguard-unable-to-find-configs-in-expected-paths)
      * [Ubuntu Error: "unable to write 'random state'" when generating CA password](#ubuntu-error-unable-to-write-random-state-when-generating-ca-password)
+     * [Timeout when waiting for search string OpenSSH in xxx.xxx.xxx.xxx:4160](#old-networking-firewall-in-place)
   * [Connection Problems](#connection-problems)
      * [I'm blocked or get CAPTCHAs when I access certain websites](#im-blocked-or-get-captchas-when-i-access-certain-websites)
      * [I want to change the list of trusted Wifi networks on my Apple device](#i-want-to-change-the-list-of-trusted-wifi-networks-on-my-apple-device)
@@ -362,6 +363,27 @@ sudo chown $USER:$USER $HOME/.rnd
 
 Now, run Algo again.
 
+### Old Networking Firewall In Place
+
+You may see the following output when attemptint to run ./algo from your localhost:
+
+```
+TASK [Wait until SSH becomes ready...] **********************************************************************************************************************
+fatal: [localhost]: FAILED! => {"changed": false, "elapsed": 321, "msg": "Timeout when waiting for search string OpenSSH in xxx.xxx.xxx.xxx:4160"}
+included: /home/<username>/algo/algo/playbooks/rescue.yml for localhost
+
+TASK [debug] ************************************************************************************************************************************************
+ok: [localhost] => {
+    "fail_hint": [
+        "Sorry, but something went wrong!",
+        "Please check the troubleshooting guide.",
+        "https://trailofbits.github.io/algo/troubleshooting.html"
+    ]
+}
+```
+
+If you see this error then one possible explanation is that you have a previous firewall configured in your cloud hosting provider which needs to be either updated or ideally removed. Removing this can often fix this issue.
+
 ## Connection Problems
 
 Look here if you deployed an Algo server but now have a problem connecting to it with a client.
@@ -502,4 +524,4 @@ If your router runs [pfSense](https://www.pfsense.org) and a single IPsec client
 
 ## I have a problem not covered here
 
-If you have an issue that you cannot solve with the guidance here, [join our Gitter](https://gitter.im/trailofbits/algo) and ask for help. If you think you found a new issue in Algo, [file an issue](https://github.com/trailofbits/algo/issues/new).
+If you have an issue that you cannot solve with the guidance here, [create a new discussion](https://github.com/trailofbits/algo/discussions) and ask for help. If you think you found a new issue in Algo, [file an issue](https://github.com/trailofbits/algo/issues/new).
